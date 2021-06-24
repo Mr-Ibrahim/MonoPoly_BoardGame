@@ -10,10 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Button DiceBtn;
 
-    void Start()
+    private void Start()
     {
-        DiceBtn= GetComponent<Button>(); //Grabs the button component
-        
+        DiceBtn = GameObject.FindObjectOfType<Button>();
     }
     public void Update()
     {
