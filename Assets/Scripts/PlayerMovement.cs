@@ -27,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (turn)
         {
-            DiceBtn.enabled = false;
+            if (DiceBtn.IsInteractable())
+            {
+                DiceBtn.interactable = false;
+            }
             StartCoroutine("MovePlayer");
             StopCoroutine("WaitTime");
         }
@@ -48,7 +51,14 @@ public class PlayerMovement : MonoBehaviour
             transform.position = item.position;
 
         }
-        DiceBtn.enabled = true;
+        if (!DiceBtn.IsInteractable())
+        {
+            DiceBtn.interactable = true;
+        }
+        else
+        {
+            print("Kuttay ka bacha change nahi ho rraha");
+        }
         print("I moved " + gameObject.name);
         currentIndex += num;
         turn = false;
