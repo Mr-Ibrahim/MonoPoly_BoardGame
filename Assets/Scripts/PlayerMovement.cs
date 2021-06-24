@@ -6,27 +6,31 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     int currentIndex = 0;
-    bool turn = false;
+    public bool turn = false;
     [SerializeField]
     Button DiceBtn;
+
     void Start()
     {
         DiceBtn= GetComponent<Button>(); //Grabs the button component
         
     }
-
     public void Update()
     {
         if (turn)
         {
             StartCoroutine("WaitTime");
-            DiceBtn.onClick.AddListener(TaskOnClick); //Adds a listner on the button  
         }
     }
-    void TaskOnClick()
+    public void TaskOnClick()
     {
-        StartCoroutine("MovePlayer");
-        StopCoroutine("WaitTime");
+
+        if (turn)
+        {
+            DiceBtn.enabled = false;
+            StartCoroutine("MovePlayer");
+            StopCoroutine("WaitTime");
+        }
     }
 
 
@@ -44,7 +48,10 @@ public class PlayerMovement : MonoBehaviour
             transform.position = item.position;
 
         }
+        DiceBtn.enabled = true;
+        print("I moved " + gameObject.name);
         currentIndex += num;
+        turn = false;
 
 
     }
