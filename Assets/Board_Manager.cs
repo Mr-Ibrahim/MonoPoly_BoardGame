@@ -5,26 +5,10 @@ using UnityEngine;
 
 public class Board_Manager : MonoBehaviour
 {
+    //Board Instance
     public static Board_Manager _instance;
-
-    internal int SetIndex(int current)
-    {
-        return current % waypoints.Count;
-    }
-
-
-
-    //public static Board_Manager Instance
-    //{
-    //    get
-    //    {
-    //        if (_instance == null)
-    //        {
-    //            _instance = new Board_Manager();
-    //        }
-    //        return _instance;
-    //    }
-    //}
+    //waypoints at  board location
+    public List<Transform> waypoints = new List<Transform>();
 
 
     private void Awake()
@@ -32,10 +16,6 @@ public class Board_Manager : MonoBehaviour
         _instance = this;
     }
 
-
-    public List<Transform> waypoints = new List<Transform>();
-    public int index = 0;
-    public Vector3 pos;
 
     //public void StartLocation(GameObject Player)
     //{
@@ -65,12 +45,11 @@ public class Board_Manager : MonoBehaviour
     //}
 
 
-        [ContextMenu("Work")]
-    public void DoesItWork()
-    {
-        print(GetPositionsData(33, 7));
-    }
 
+    internal int SetIndex(int current)
+    {
+        return current % waypoints.Count;
+    }
 
     internal List<Transform> GetPositionsData(int current, int num)
     {
@@ -86,3 +65,8 @@ public class Board_Manager : MonoBehaviour
         return new List<Transform>(waypoints.GetRange(current, num));
     }
 }
+//    [ContextMenu("Work")]
+//public void DoesItWork()
+//{
+//    print(GetPositionsData(33, 7));
+//}
